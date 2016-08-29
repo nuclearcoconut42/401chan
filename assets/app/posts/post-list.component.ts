@@ -6,10 +6,10 @@ import {PostService} from "./post.service";
 @Component({
     selector: 'post-list',
     template: `
-        <div class="posts">
+        <div *ngIf="parent" class="posts">
             <post [post]="parent">Loading post...</post>
             <post-list *ngFor="let postId of parent.children" [postId]="postId">
-                Loading replies...
+                 Loading replies...
             </post-list>
         </div>
     `,
@@ -24,15 +24,13 @@ import {PostService} from "./post.service";
 
 export class PostListComponent{
     @Input() postId:number;
-     
+
     constructor(private _postService: PostService){}
-    
     parent: Post;
     ngOnInit(){
         this._postService.getPost(this.postId).subscribe(
             data => {
                 this.parent = new Post(data.content, data.parent, data.children, data.timestamp, data._id);
-                console.log(this.parent);
             }
         );
     }

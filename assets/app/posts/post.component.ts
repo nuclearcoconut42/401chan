@@ -25,7 +25,7 @@ import {PostService} from "./post.service";
                     </div>
                 </footer>
             </article>
-        
+
     `,
     styles: [`
         .info{
@@ -44,9 +44,9 @@ import {PostService} from "./post.service";
 
 export class PostComponent{
     @Input() post:Post;
-    
+
     constructor(private _postService:PostService){}
-    
+
     onDelete(){
         this._postService.deletePost(this.post._id).subscribe(
             data => {
@@ -55,11 +55,11 @@ export class PostComponent{
         );
         this._postService.getThreads();
     }
-    
+
     onReply(){
         this._postService.setParent(this.post._id);
     }
-    
+
     onBan(){
         this._postService.banUser(this.post._id).subscribe(
             data => {

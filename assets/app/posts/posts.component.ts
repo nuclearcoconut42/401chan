@@ -20,7 +20,7 @@ import {PostService} from './post.service';
                 <post-list [postId]="getAncestorId()">
                     Loading posts...
                 </post-list>
-                <button (click)="onUpdate()" class="btn btn-primary">Update</button>
+                <button (click)="getAncestorId()" class="btn btn-primary">Update</button>
             </section>
         </div>
     `,
@@ -30,10 +30,7 @@ import {PostService} from './post.service';
 export class PostsComponent{
     constructor(private _cookieService:CookieService, private _postService: PostService){}
     getAncestorId(){
-        return this.getCookie('ancestorId');
-    }
-    getCookie(key: string){
-        return this._cookieService.get(key);
+        return this._cookieService.get('ancestorId');
     }
     removeCookie(key: string){
         var value = this._cookieService.get(key);
