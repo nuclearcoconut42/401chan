@@ -29,7 +29,7 @@ function init(){
 
 router.get('/', function(req, res, next){
   init();
-  res.cookie('ancestorId', '0', {secure: false, httpOnly: false});
+  res.cookie('ancestorId', '0', {secure: false, httpOnly: false})
   res.render('index');
 });
 
