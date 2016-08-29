@@ -21,8 +21,6 @@
   },
   "files": [
     "./assets/app/app.component.ts",
-    "./assets/app/boot.ts",
-    "./assets/app/post.component.ts",
-    "./assets/app/post.service.ts"
+    "./assets/app/boot.ts"
   ]
 }

@@ -47,35 +47,9 @@ router.post('/signin', function(req, res, next){
        message: 'Success',
        obj: token
      });
-   } 
+   }
 });
 
-router.post('/ban/:postId', function(req, res, next){
-  Post.findOne({_id: req.params.postId}, function(err, post){
-        if(err){
-            return {
-                title: 'An error occurred', error: err
-            };
-        }
-        if(post){
-          var ban = new Ban({
-            ip: post.ip,
-            timestamp: moment().tz('America/New_York').format('YYYY/M/D k:mm:ss')
-          });
-          ban.save(function(err, result){
-            if(err){
-              return res.status(404).json({
-                title: 'An error occurred',
-                error: err
-              });
-            }
-            res.status(201).json({
-              post: 'Saved ban',
-              obj: result
-            });
-          });
-        }
-  });
-});
+
 
 module.exports = router;
