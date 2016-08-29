@@ -35,12 +35,14 @@ export class PostService{
     }
 
     getPost(postId){
+        let headers = new Headers({'Content-Type':'application/json'});
         return this._http.get('http://localhost:3000/api/' + postId)
             .map(this.extractData)
             .catch(error => Observable.throw(error.json()));
     }
 
     deletePost(postId){
+        let headers = new Headers({'Content-Type':'application/json'});
         const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
         this.clearThreads();
         return this._http.delete('http://localhost:3000/api/' + postId + token)
@@ -49,6 +51,7 @@ export class PostService{
     }
 
     banUser(postId){
+        let headers = new Headers({'Content-Type':'application/json'});
         const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
         return this._http.post('http://localhost:3000/api/ban/' + postId + token, "")
             .map(this.extractData)
