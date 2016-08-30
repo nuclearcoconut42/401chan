@@ -3,19 +3,17 @@ import {PostInputComponent} from "./post-input.component";
 import {Http, Headers, Response, RequestOptions} from "@angular/http";
 import {Observable} from 'rxjs/Rx';
 import {Injectable} from "@angular/core";
+import {CookieService} from 'angular2-cookie/core';
 
 @Injectable()
 export class PostService{
-
-    constructor(private _http: Http){}
-
+    constructor(private _http: Http, private _cookieService:CookieService){}
+    ancestorId: String;
     parentValue: number;
 
     setParent(id:number){
         this.parentValue = id;
     }
-
-    threadIds: number[];
 
     isLoggedIn(){
         if(localStorage.getItem('token')){
@@ -28,7 +26,6 @@ export class PostService{
         let body = JSON.stringify(post);
         let headers = new Headers({'Content-Type':'application/json'});
         let options = new RequestOptions({headers: headers});
-        this.clearThreads();
         return this._http.post('http://localhost:3000/api/', body, options)
             .map(this.extractData)
             .catch(error => Observable.throw(error.json()));
@@ -44,7 +41,6 @@ export class PostService{
     deletePost(postId){
         let headers = new Headers({'Content-Type':'application/json'});
         const token = localStorage.getItem('token') ? '?token=' + localStorage.getItem('token') : '';
-        this.clearThreads();
         return this._http.delete('http://localhost:3000/api/' + postId + token)
             .map(this.extractData)
             .catch(error => Observable.throw(error.json));
@@ -58,21 +54,20 @@ export class PostService{
             .catch(error => Observable.throw(error.json));
     }
 
-    reloadThreads(){
-        this.clearThreads();
-        this.getThreads();
+    resetAncestorId(){
+        this.ancestorId = "";
     }
-
-    clearThreads(){
-        this.threadIds = [];
+    getAncestorId(){
+        this.ancestorId = this._cookieService.get("ancestorId");
     }
-
-    getThreads(){
-        this.getPost(0).subscribe(
-            data => {
-                this.threadIds = data.children;
-            }
-        );
+    reloadAncestorId(){
+        this.resetAncestorId();
+        this.getAncestorId();
+    }
+    removeCookie(key: string){
+        var value = this._cookieService.get(key);
+        this._cookieService.remove(key);
+        return value;
     }
 
     private extractData(response: Response) {

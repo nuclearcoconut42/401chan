@@ -19,14 +19,15 @@ import {PostService} from "./post.service";
 
 export class PostInputComponent{
     constructor(private _postService:PostService){}
-    
+
     post: Post;
-    
+
     onSubmit(form:any){
         this.post = new Post(form.content, form.parent || 0, [], null);
         this._postService.addPost(this.post).subscribe(
             data => {
-                this._postService.reloadThreads();
+                console.log(this.post);
+                console.log(data);
             }
         );
     }

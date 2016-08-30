@@ -8,7 +8,7 @@ import {PostService} from "./post.service";
             <article class="panel panel-default">
                 <header class="panel-header">
                     <div class="info">
-                        #{{ post._id }} {{ post.timestamp }}
+                        #<a href="{{post._id}}">{{ post._id }}</a> {{ post.timestamp }}
                     </div>
                 </header>
                 <div class="panel-body">
@@ -53,7 +53,6 @@ export class PostComponent{
                 console.log(data);
             }
         );
-        this._postService.getThreads();
     }
 
     onReply(){
@@ -66,6 +65,5 @@ export class PostComponent{
                 console.log(data);
             }
         );
-        this._postService.getThreads();
     }
 }
