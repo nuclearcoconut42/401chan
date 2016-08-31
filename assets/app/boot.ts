@@ -10,4 +10,4 @@ import {AppComponent} from "./app.component";
 import {PostService} from "./posts/post.service";
 import {AuthService} from "./auth/auth.service";
 
-bootstrap(AppComponent, [PostService, AuthService, CookieService, ROUTER_PROVIDERS, provide(LocationStrategy, {useClass: HashLocationStrategy}), HTTP_PROVIDERS]);
+bootstrap(AppComponent, [PostService, AuthService, ROUTER_PROVIDERS, provide(LocationStrategy, {useClass: HashLocationStrategy}), HTTP_PROVIDERS]);

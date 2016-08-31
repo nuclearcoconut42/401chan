@@ -26,8 +26,7 @@ export class PostInputComponent{
         this.post = new Post(form.content, form.parent || 0, [], null);
         this._postService.addPost(this.post).subscribe(
             data => {
-                console.log(this.post);
-                console.log(data);
+                console.log(this.post + " sent to server");
             }
         );
     }

@@ -21,6 +21,7 @@
   },
   "files": [
     "./assets/app/app.component.ts",
+    "./assets/app/app.routing.ts",
     "./assets/app/boot.ts"
   ]
 }

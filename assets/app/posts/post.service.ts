@@ -54,22 +54,6 @@ export class PostService{
             .catch(error => Observable.throw(error.json));
     }
 
-    resetAncestorId(){
-        this.ancestorId = "";
-    }
-    getAncestorId(){
-        this.ancestorId = this._cookieService.get("ancestorId");
-    }
-    reloadAncestorId(){
-        this.resetAncestorId();
-        this.getAncestorId();
-    }
-    removeCookie(key: string){
-        var value = this._cookieService.get(key);
-        this._cookieService.remove(key);
-        return value;
-    }
-
     private extractData(response: Response) {
         let data = response.json().obj;
         return data || { };
